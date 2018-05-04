@@ -8,7 +8,7 @@ class App extends Component {
         <Header />
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar imperdiet dolor vel tempor. Duis maximus ante eget dui facilisis tincidunt eu sed sem. Vivamus est quam, tempus nec euismod vel, posuere non leo. Integer congue eros at lacus dapibus faucibus sed vitae diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse tempus tempus tellus sed mollis. Integer non ante lorem.</p>
         <Simulation />
-        <Graph />
+        <Graphs />
         <Result />
         <Footer />
       </div>
@@ -42,7 +42,7 @@ class Simulation extends Component {
 
 // Graph Component
 
-class Graph extends Component {
+class Graphs extends Component {
   render () {
     return (
       <div className="graph-container">
