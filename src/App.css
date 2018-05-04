@@ -9,7 +9,7 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
+  height: 20px;
   padding: 20px;
   color: white;
 }
@@ -22,7 +22,67 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+div {
+  margin:0 5px 5px 5px;
+}
+.simulation-container {
+  display: flex;
+  justify-content: space-between;
+  /* border: 1px solid rgba(100,100,100,0.5); */
+}
+.canvas {
+  margin: 5px;
+  flex-basis: 75%;
+  height: 300px;
+  border: 1px solid rgba(100,100,100,0.5); 
+  border-radius: 3px;
+  /* background-color: red; */
+}
+.action-menu {
+  margin: 5px;
+  flex-basis: 20%;
+  height: 300px;
+  border: 1px solid rgba(100,100,100,0.5);
+  border-radius: 3px;
+  /* background-color: blue; */
+}
+
+.graph-container {
+  display: flex;
+  justify-content: space-around;
+  /* border: 1px solid rgba(100,100,100,0.5); */
+}
+.graph-one {
+  flex-basis: 40%;
+  height: 100px;
+  border: 1px solid rgba(100,100,100,0.5);
+  border-radius: 3px;
+  /* background-color: blue; */
+}
+.graph-two {
+  flex-basis: 40%;
+  height: 100px;
+  border: 1px solid rgba(100,100,100,0.5);
+  border-radius: 3px;
+  /* background-color: green; */
+}
+.results-container {
+  /* border: 1px solid rgba(100,100,100,0.5); */
+}
+
+
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #dddddd;
 }
