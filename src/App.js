@@ -32,7 +32,7 @@ class Simulation extends Component {
   render () {
     return (
     <div className="simulation-container">
-      <canvas className="canvas" id="tutorial" width="500" height="250"></canvas>
+      <canvas className="canvas" id="tutorial" width="150" height="250"></canvas>
       <ActionMenu />
     </div>    
     )    
@@ -40,10 +40,10 @@ class Simulation extends Component {
   componentDidMount() {
     let canvas = document.getElementById('tutorial');
     if(canvas.getContext){
-      var ctx = canvas.getContext('2d');
-      ctx.fillRect(25, 25, 100, 100);
-      ctx.clearRect(45, 45, 60, 60);
-      ctx.strokeRect(50, 50, 50, 50);
+      // var ctx = canvas.getContext('2d');
+      // ctx.fillRect(25, 25, 100, 100);
+      // ctx.clearRect(45, 45, 60, 60);
+      // ctx.strokeRect(50, 50, 50, 50);
     }
   }
 }

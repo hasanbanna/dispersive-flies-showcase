@@ -4,6 +4,11 @@
   text-align: center;
   font-family: 'Roboto';
   -webkit-font-smoothing: antialiased;
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+  margin: auto;
+  /* border: 1px solid black; */
 }
 
 .App-header {
@@ -21,9 +26,6 @@
   font-size: large;
 }
 
-div {
-  margin:0 5px 5px 5px;
-}
 .simulation-container {
   display: flex;
   justify-content: space-between;
@@ -132,8 +134,4 @@ tr:nth-child(even) {
   margin: 4px 2px;
   cursor: pointer;
   border-radius: 3px;
-}
-
-#tutorial {
-  border: 1px solid black;
 }
