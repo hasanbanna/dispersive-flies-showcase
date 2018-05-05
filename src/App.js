@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ActionMenu from './components/ActionMenu';
 import './App.css';
 
 class App extends Component {
@@ -33,7 +34,7 @@ class Simulation extends Component {
     return (
     <div className="simulation-container">
       <div className="canvas"></div>
-      <div className="action-menu"></div>
+      <ActionMenu />
     </div>    
     )    
   }
