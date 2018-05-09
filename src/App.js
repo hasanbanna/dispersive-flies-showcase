@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import ActionMenu from './components/ActionMenu';
+import P5Wrapper from 'react-p5-wrapper';
+import sketch  from './modelAnimation/Sketch';
+
 import './App.css';
 
 class App extends Component {
@@ -32,19 +35,13 @@ class Simulation extends Component {
   render () {
     return (
     <div className="simulation-container">
-      <canvas className="canvas" id="tutorial" width="150" height="250"></canvas>
+      <P5Wrapper sketch={sketch} />
       <ActionMenu />
     </div>    
     )    
   }
   componentDidMount() {
-    let canvas = document.getElementById('tutorial');
-    if(canvas.getContext){
-      // var ctx = canvas.getContext('2d');
-      // ctx.fillRect(25, 25, 100, 100);
-      // ctx.clearRect(45, 45, 60, 60);
-      // ctx.strokeRect(50, 50, 50, 50);
-    }
+    
   }
 }
 
