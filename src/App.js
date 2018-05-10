@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ActionMenu from './components/ActionMenu';
 import P5Wrapper from 'react-p5-wrapper';
-import sketch  from './modelAnimation/Sketch';
+import sketch from './modelAnimation/Sketch';
 
 import './App.css';
 
@@ -10,8 +10,11 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
-        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar imperdiet dolor vel tempor. Duis maximus ante eget dui facilisis tincidunt eu sed sem. Vivamus est quam, tempus nec euismod vel, posuere non leo. Integer congue eros at lacus dapibus faucibus sed vitae diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse tempus tempus tellus sed mollis. Integer non ante lorem.</p>
-        <Simulation />
+        <p className="introduction">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean pulvinar imperdiet dolor vel tempor. Duis maximus ante eget dui facilisis tincidunt eu sed sem. Vivamus est quam, tempus nec euismod vel, posuere non leo. Integer congue eros at lacus dapibus faucibus sed vitae diam. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse tempus tempus tellus sed mollis. Integer non ante lorem.</p>
+        <div className="simulation-background">
+          <Simulation />
+        </div>
         {/* <Result /> */}
         <Footer />
       </div>
@@ -39,9 +42,6 @@ class Simulation extends Component {
       <ActionMenu />
     </div>    
     )    
-  }
-  componentDidMount() {
-    
   }
 }
 
