@@ -15,11 +15,13 @@ export default class Animation {
    return this.angles;
  }
  createSegments (sketch) {
+   this.segments = [];
    this.segments.push(new Segment(sketch.width/2, sketch.height/2, sketch.radians(0),this.lenSize, this.residueSize, sketch));
    let currentSeg = 1;
    let currentAngle = 0;
-   for(let angle in this.angles){
-     currentAngle -= this.angles[angle];
+   let angles = this.getAngles();
+   for(let angle in angles){
+     currentAngle -= angles[angle];
      let seg = new Segment(this.segments[currentSeg-1].getB().x,this.segments[currentSeg-1].getB().y,sketch.radians(currentAngle), this.lenSize, this.residueSize, sketch);
      this.segments.push(seg);
      currentSeg++;
@@ -33,4 +35,3 @@ export default class Animation {
    }
  }   
 }
-

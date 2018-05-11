@@ -8,7 +8,14 @@ export default class Dfo {
     this.num_of_dimensions = _nod;
     this.dt = _dt;
     this.num_of_evaluation = _noe;
-    this.proteinChain = protein_chain;
+    this.population = this.generatePopulation();
+    this.proteinChain = this.convertAB(protein_chain);
+    this.swarm_best = {fitness: Infinity };
+    this.previous_swarm_best = {fitness: Infinity};
+    this.neighbour_best = [];
+    this.k = 0;
+    this.K = 10;
+    
   }
   generateRandomDimensionArray (num_of_dimensions) {
     const lowerbound = -180;
@@ -25,57 +32,45 @@ export default class Dfo {
     return Math.random() * (max - min) + min;
   }
   
-  dfo(){
-    // generate population;
-    let population = [];
-  
-    for (let i = 0; i < this.num_of_flies; i++) {
-      let fly = {
-        dimensions: this.insertZeroAtEnds(this.generateRandomDimensionArray(this.num_of_dimensions))
-      }
-      population.push(fly);
-    }
+  iterate(){
+    // generate this.population;
+    
     // flies update 
-    let iteration = 0
-    let swarm_best = { fitness: Infinity }
-    let previous_swarm_best = {fitness: Infinity}
-    let neighbour_best = []
+    // let iteration = 0
+
     // let bestSolution = { fitness: Infinity }
-  
-    let k = 0
-    let K = 5
-    while (iteration < this.num_of_evaluations) {
-  
+    // while (iteration < this.num_of_evaluations) {
+      // console.log(this.proteinChain);
       // apply fitness function
-      population.forEach(function (fly) {
+      this.population.forEach((fly) => {
         fly.fitness = fitness(this.proteinChain, fly.dimensions)
       })
   
-      previous_swarm_best = swarm_best
+      this.previous_swarm_best = this.swarm_best
       for(let i = 0; i < this.num_of_flies; i++){
-        if(population[i].fitness < swarm_best.fitness){
-          swarm_best = population[i]
+        if(this.population[i].fitness < this.swarm_best.fitness){
+          this.swarm_best = this.population[i]
         }
       }
   
-      // fitness_arr.push(swarm_best.fitness)
+      // fitness_arr.push(this.swarm_best.fitness)
   
-      neighbour_best = population.map(function (fly, index) {
+      this.neighbour_best = this.population.map((fly, index) => {
         if (index === 0) {
-          return [population[index], {fitness: Infinity}]
-        } else if (index === population.length - 1) {
-          return [{fitness: Infinity}, population[index]]
+          return [this.population[index], {fitness: Infinity}]
+        } else if (index === this.population.length - 1) {
+          return [{fitness: Infinity}, this.population[index]]
         } else {
-          return [population[index - 1], population[index + 1]]
+          return [this.population[index - 1], this.population[index + 1]]
         }
       }).map(function (arr) {
         return arr[0].fitness < arr[1].fitness ? arr[0] : arr[1]
       })
 
-      population.forEach( (fly, index) => {
-        if(fly === swarm_best) return 
+      this.population.forEach((fly, index) => {
+        if(fly === this.swarm_best) return 
         for(let i = 1; i < this.num_of_dimensions-1; i++) {
-          fly.dimensions[i] = neighbour_best[index].dimensions[i] + Math.random()  * (swarm_best.dimensions[i] - fly.dimensions[i])
+          fly.dimensions[i] = this.neighbour_best[index].dimensions[i] + Math.random()  * (this.swarm_best.dimensions[i] - fly.dimensions[i])
           if(Math.random() < this.dt){
             fly.dimensions[i] = this.getRandomArbitrary(-180,180)
           }
@@ -83,30 +78,35 @@ export default class Dfo {
             fly.dimensions[i] = this.getRandomArbitrary(-180,180) 
           }
         }
+        // console.log(this.neighbour_best[index])
       })
   
       
-      if (this.improvement(previous_swarm_best, swarm_best) > 0.0001) k = 0
+      if (this.improvement(this.previous_swarm_best, this.swarm_best) > 0.0001) this.k = 0
 
-      if(k >= K) {
-        neighbour_best = population.map((fly) => {
+      if(this.k >= this.K) {
+        this.neighbour_best = this.this.population.map((fly) => {
           let flyCopy = Object.assign({}, fly)
           flyCopy.dimensions = this.generateRandomDimensionArray(this.num_of_dimensions)
           return flyCopy
         })
-        k = 0
+        this.k = 0
       }
-      // if(swarm_best.fitness < bestSolution.fitness) {
-      //   bestSolution = swarm_best
+      console.log(this.getSwarmBestDimensions(), this.swarm_best.fitness);
+      // if(this.swarm_best.fitness < bestSolution.fitness) {
+      //   bestSolution = this.swarm_best
       // }
       // fitness_arr.push(bestSolution.fitness)
-      // console.log(swarm_best.fitness)
-      iteration++
-      k++
-    }
+      // console.log(this.swarm_best.fitness)
+      // iteration++
+      // k++
+    // }
     // return fitness_arr
   }
 
+  getSwarmBestDimensions(){
+    return this.swarm_best.dimensions;
+  }
   convertAB (ab_string) {
     let residue = []
     for(let i = 0; i < ab_string.length; i++){
@@ -118,7 +118,7 @@ export default class Dfo {
     }
     return residue
   }
-  
+
   insertZeroAtEnds(proteinAngle) {
     proteinAngle.push(0)
     proteinAngle.unshift(0)
@@ -127,6 +127,18 @@ export default class Dfo {
   
   improvement (previousGlobalBest, currentGlobalBest) {
     return (previousGlobalBest.fitness - currentGlobalBest.fitness) / previousGlobalBest.fitness
+  }
+
+  generatePopulation () {
+    let population_array = [];
+    for (let i = 0; i < this.num_of_flies; i++) {
+      let fly = {
+        dimensions: this.insertZeroAtEnds(this.generateRandomDimensionArray(this.num_of_dimensions))
+      }
+      population_array.push(fly);
+    
+    }
+    return population_array;
   }
 
 }
@@ -145,5 +157,5 @@ export default class Dfo {
 
 
 
-// fitness_per_iteration.push(swarm_best.fitness);  
+// fitness_per_iteration.push(this.swarm_best.fitness);  
 
